@@ -28,8 +28,9 @@ const cardVariants = {
     scale: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
-      damping: 20,
+      stiffness: 80,
+      damping: 18,
+      mass: 0.8,
     },
   },
 }
@@ -96,9 +97,9 @@ const labelResting = {
   transition: { type: 'spring' as const, stiffness: 400, damping: 30 },
 }
 
-const FloatingInput: React.FC<FloatingInputProps> = ({
+const FloatingInput: React.FC<FloatingInputProps> = React.memo(function FloatingInput({
   id, label, type, value, onChange, onFocus, onBlur, index, autoComplete,
-}) => {
+}) {
   const [focused, setFocused] = useState(false)
   const isFloated = focused || value.length > 0
 
@@ -116,12 +117,14 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
       className="relative"
       variants={fieldVariants}
       custom={index}
+      style={{ willChange: 'transform, opacity' }}
     >
       <motion.label
         htmlFor={id}
         className="pointer-events-auto absolute left-4 top-0 origin-left select-none text-sm font-medium uppercase tracking-widest"
         animate={isFloated ? labelFloated : labelResting}
         initial={labelResting}
+        style={{ willChange: 'transform, color' }}
       >
         {label}
       </motion.label>
@@ -136,8 +139,8 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
         autoComplete={autoComplete}
         className={cn(
           'pointer-events-auto',
-          'w-full rounded-xl border bg-white/5 px-4 pt-6 pb-2',
-          'text-sm text-gray-100 outline-none',
+          'w-full rounded-xl border bg-white/5 px-4 pt-7 pb-2.5',
+          'text-base text-gray-100 outline-none',
           'transition-all duration-200 backdrop-blur-sm',
           focused
             ? 'border-white/30 bg-white/10 shadow-[0_0_0_3px_rgba(255,255,255,0.07)]'
@@ -146,7 +149,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
       />
     </motion.div>
   )
-}
+})
 
 // ─── AUTH FORM ────────────────────────────────────────────────────────────────
 
@@ -158,9 +161,9 @@ interface AuthFormProps {
   onPasswordBlur: () => void
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({
+const AuthForm: React.FC<AuthFormProps> = React.memo(function AuthForm({
   mode, onToggle, onForgotPassword, onPasswordFocus, onPasswordBlur,
-}) => {
+}) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -204,7 +207,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           key="forgotPassword"
           onSubmit={handleSubmit}
           noValidate
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-6"
           custom={formCustom}
           variants={formSwitchVariants}
           initial="hidden"
@@ -215,7 +218,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">
               Account recovery
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white">
               Reset Password
             </h1>
           </motion.div>
@@ -250,8 +253,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
             whileTap={{ scale: 0.97 }}
             className={cn(
               'pointer-events-auto',
-              'mt-1 w-full rounded-xl py-3.5 px-6',
-              'text-sm font-bold tracking-wide text-white bg-[#1c1c28]',
+              'mt-1 w-full rounded-xl py-4 px-6',
+              'text-base font-bold tracking-wide text-white bg-[#1c1c28]',
               'transition-all duration-300 border border-white/10',
               'shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.6)]',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
@@ -279,7 +282,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           key={mode}
           onSubmit={handleSubmit}
           noValidate
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-6"
           custom={formCustom}
           variants={formSwitchVariants}
           initial="hidden"
@@ -290,7 +293,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">
               {isSignUp ? 'Get started' : 'Welcome back'}
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white">
               {isSignUp ? 'Create Account' : 'Sign In'}
             </h1>
           </motion.div>
@@ -343,8 +346,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
             whileTap={{ scale: 0.97 }}
             className={cn(
               'pointer-events-auto',
-              'mt-1 w-full rounded-xl py-3.5 px-6',
-              'text-sm font-bold tracking-wide text-white bg-[#1c1c28]',
+              'mt-1 w-full rounded-xl py-4 px-6',
+              'text-base font-bold tracking-wide text-white bg-[#1c1c28]',
               'transition-all duration-300 border border-white/10',
               'shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.6)]',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
@@ -365,7 +368,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               type="button"
               whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.08)' }}
               whileTap={{ scale: 0.97 }}
-              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -381,7 +384,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               type="button"
               whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.08)' }}
               whileTap={{ scale: 0.97 }}
-              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -408,7 +411,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
       )}
     </AnimatePresence>
   )
-}
+})
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
@@ -441,8 +444,11 @@ const AuthPage: React.FC = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-[#111119] via-[#1a1a2e] to-[#16213e]">
 
-      {/* ── Spline canvas — z-0, always receives mouse events ── */}
-      <div className="absolute inset-0 z-0">
+      {/* ── Spline canvas — isolated GPU layer, z-0, always receives mouse events ── */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{ willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
+      >
         <AnimatePresence>
           {!splineReady && (
             <motion.div
@@ -474,24 +480,27 @@ const AuthPage: React.FC = () => {
         <div className="w-full max-w-[90rem] mx-auto flex items-center justify-end h-full pr-8 md:pr-16 lg:pr-24">
 
           <motion.div
-            className="w-full max-w-sm flex-shrink-0"
+            className="w-full max-w-md flex-shrink-0"
             variants={cardVariants}
             initial="hidden"
-            animate={splineReady ? "visible" : "hidden"} 
+            animate={splineReady ? "visible" : "hidden"}
+            style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
           >
             {/* Glass card — layout enables liquid morph height transition */}
             <motion.div
               layout
+              layoutRoot
               className={cn(
                 'pointer-events-none relative overflow-hidden',
                 'rounded-2xl border border-white/10',
                 'bg-black/30 backdrop-blur-2xl',
                 'shadow-[0_8px_60px_rgba(0,0,0,0.6),0_2px_0_rgba(255,255,255,0.05)_inset]'
               )}
+              style={{ willChange: 'transform, opacity', backfaceVisibility: 'hidden' }}
             >
               <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-              <div className="p-8">
+              <div className="p-10">
                 <AuthForm
                   mode={authMode}
                   onToggle={() => setAuthMode((m) => (m === 'signin' ? 'signup' : 'signin'))}
