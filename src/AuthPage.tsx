@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 
-const SPLINE_URL = 'https://prod.spline.design/ixhHIo59KNe4UVcd/scene.splinecode'
+const SPLINE_URL = 'https://prod.spline.design/3obkoKV092xJzQGR/scene.splinecode'
 const SPLINE_PASSWORD_OBJECT = 'Password'
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
@@ -86,13 +86,13 @@ interface FloatingInputProps {
 const labelFloated = {
   y: 0,
   scale: 0.72,
-  color: '#111111',
+  color: '#e5e7eb',
   transition: { type: 'spring' as const, stiffness: 400, damping: 30 },
 }
 const labelResting = {
   y: 14,
   scale: 1,
-  color: '#9ca3af',
+  color: '#6b7280',
   transition: { type: 'spring' as const, stiffness: 400, damping: 30 },
 }
 
@@ -136,12 +136,12 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
         autoComplete={autoComplete}
         className={cn(
           'pointer-events-auto',
-          'w-full rounded-xl border bg-white/50 px-4 pt-6 pb-2',
-          'text-sm text-gray-900 outline-none',
+          'w-full rounded-xl border bg-white/5 px-4 pt-6 pb-2',
+          'text-sm text-gray-100 outline-none',
           'transition-all duration-200 backdrop-blur-sm',
           focused
-            ? 'border-gray-900/50 bg-white/70 shadow-[0_0_0_3px_rgba(0,0,0,0.08)]'
-            : 'border-gray-300/50 hover:border-gray-400/70 hover:bg-white/60'
+            ? 'border-white/30 bg-white/10 shadow-[0_0_0_3px_rgba(255,255,255,0.07)]'
+            : 'border-white/10 hover:border-white/20 hover:bg-white/8'
         )}
       />
     </motion.div>
@@ -212,10 +212,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
           exit="exit"
         >
           <motion.div variants={fieldVariants} custom={0} className="space-y-0.5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">
               Account recovery
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
+            <h1 className="text-3xl font-extrabold tracking-tight text-white">
               Reset Password
             </h1>
           </motion.div>
@@ -246,15 +246,15 @@ const AuthForm: React.FC<AuthFormProps> = ({
             type="submit"
             variants={fieldVariants}
             custom={4}
-            whileHover={{ scale: 1.02, backgroundColor: '#1a1a1a' }}
+            whileHover={{ scale: 1.02, backgroundColor: '#2d2d3a' }}
             whileTap={{ scale: 0.97 }}
             className={cn(
               'pointer-events-auto',
               'mt-1 w-full rounded-xl py-3.5 px-6',
-              'text-sm font-bold tracking-wide text-white bg-black',
-              'transition-all duration-300',
-              'shadow-[0_4px_20px_rgba(0,0,0,0.22)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.32)]',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2'
+              'text-sm font-bold tracking-wide text-white bg-[#1c1c28]',
+              'transition-all duration-300 border border-white/10',
+              'shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.6)]',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
             )}
           >
             Send Reset Link →
@@ -268,7 +268,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <button
               type="button"
               onClick={handleBackToSignIn}
-              className="pointer-events-auto font-semibold text-gray-900 underline-offset-2 transition-colors hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 rounded"
+              className="pointer-events-auto font-semibold text-gray-300 underline-offset-2 transition-colors hover:text-white hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
             >
               ← Back to Sign In
             </button>
@@ -287,10 +287,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
           exit="exit"
         >
           <motion.div variants={fieldVariants} custom={0} className="space-y-0.5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-500">
               {isSignUp ? 'Get started' : 'Welcome back'}
             </p>
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
+            <h1 className="text-3xl font-extrabold tracking-tight text-white">
               {isSignUp ? 'Create Account' : 'Sign In'}
             </h1>
           </motion.div>
@@ -328,7 +328,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               <button
                 type="button"
                 onClick={handleForgotClick}
-                className="pointer-events-auto text-xs text-gray-400 transition-colors hover:text-gray-900 focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 rounded"
+                className="pointer-events-auto text-xs text-gray-500 transition-colors hover:text-gray-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
               >
                 Forgot password?
               </button>
@@ -339,33 +339,33 @@ const AuthForm: React.FC<AuthFormProps> = ({
             type="submit"
             variants={fieldVariants}
             custom={6}
-            whileHover={{ scale: 1.02, backgroundColor: '#1a1a1a' }}
+            whileHover={{ scale: 1.02, backgroundColor: '#2d2d3a' }}
             whileTap={{ scale: 0.97 }}
             className={cn(
               'pointer-events-auto',
               'mt-1 w-full rounded-xl py-3.5 px-6',
-              'text-sm font-bold tracking-wide text-white bg-black',
-              'transition-all duration-300',
-              'shadow-[0_4px_20px_rgba(0,0,0,0.22)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.32)]',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2'
+              'text-sm font-bold tracking-wide text-white bg-[#1c1c28]',
+              'transition-all duration-300 border border-white/10',
+              'shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.6)]',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
             )}
           >
             {isSignUp ? 'Create Account →' : 'Sign In →'}
           </motion.button>
 
           <motion.div variants={fieldVariants} custom={7} className="flex items-center gap-3">
-            <span className="h-px flex-1 bg-gray-200" />
-            <span className="text-[10px] uppercase tracking-widest text-gray-400">or</span>
-            <span className="h-px flex-1 bg-gray-200" />
+            <span className="h-px flex-1 bg-white/10" />
+            <span className="text-[10px] uppercase tracking-widest text-gray-600">or</span>
+            <span className="h-px flex-1 bg-white/10" />
           </motion.div>
 
           <motion.div variants={fieldVariants} custom={8} className="grid grid-cols-2 gap-3">
             {/* Google */}
             <motion.button
               type="button"
-              whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.85)' }}
+              whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.08)' }}
               whileTap={{ scale: 0.97 }}
-              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-gray-300/50 bg-white/50 px-4 py-2.5 text-xs font-semibold text-gray-700 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-400/60 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -379,9 +379,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
             {/* GitHub */}
             <motion.button
               type="button"
-              whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.85)' }}
+              whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.08)' }}
               whileTap={{ scale: 0.97 }}
-              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-gray-300/50 bg-white/50 px-4 py-2.5 text-xs font-semibold text-gray-700 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-gray-400/60 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+              className="pointer-events-auto flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-gray-300 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -399,7 +399,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <button
               type="button"
               onClick={handleSignUpToggle}
-              className="pointer-events-auto font-semibold text-gray-900 underline-offset-2 transition-colors hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 rounded"
+              className="pointer-events-auto font-semibold text-gray-300 underline-offset-2 transition-colors hover:text-white hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
             >
               {isSignUp ? 'Sign In' : 'Create one'}
             </button>
@@ -439,7 +439,7 @@ const AuthPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#f0f0f0]">
+    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-[#111119] via-[#1a1a2e] to-[#16213e]">
 
       {/* ── Spline canvas — z-0, always receives mouse events ── */}
       <div className="absolute inset-0 z-0">
@@ -447,15 +447,15 @@ const AuthPage: React.FC = () => {
           {!splineReady && (
             <motion.div
               key="loader"
-              className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#f0f0f0]"
+              className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#111119] via-[#1a1a2e] to-[#16213e]"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 1.5, ease: 'easeInOut' } }}
             >
               <div className="relative h-14 w-14">
-                <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-gray-400" />
-                <div className="absolute inset-2 animate-spin rounded-full border-2 border-transparent border-t-gray-600 [animation-direction:reverse] [animation-duration:700ms]" />
+                <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-gray-500" />
+                <div className="absolute inset-2 animate-spin rounded-full border-2 border-transparent border-t-gray-400 [animation-direction:reverse] [animation-duration:700ms]" />
               </div>
-              <p className="animate-pulse text-[10px] uppercase tracking-[0.3em] text-gray-400">
+              <p className="animate-pulse text-[10px] uppercase tracking-[0.3em] text-gray-600">
                 Loading
               </p>
             </motion.div>
@@ -484,12 +484,12 @@ const AuthPage: React.FC = () => {
               layout
               className={cn(
                 'pointer-events-none relative overflow-hidden',
-                'rounded-2xl border border-gray-200/80',
-                'bg-white/75 backdrop-blur-2xl',
-                'shadow-[0_8px_40px_rgba(0,0,0,0.18),0_2px_0_rgba(255,255,255,1)_inset]'
+                'rounded-2xl border border-white/10',
+                'bg-black/30 backdrop-blur-2xl',
+                'shadow-[0_8px_60px_rgba(0,0,0,0.6),0_2px_0_rgba(255,255,255,0.05)_inset]'
               )}
             >
-              <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-white/90 to-transparent" />
+              <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
               <div className="p-8">
                 <AuthForm
@@ -501,7 +501,7 @@ const AuthPage: React.FC = () => {
                 />
               </div>
 
-              <div className="absolute inset-x-0 bottom-0 h-px rounded-b-2xl bg-gradient-to-r from-transparent via-black/[0.05] to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-px rounded-b-2xl bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
             </motion.div>
 
           </motion.div>
